@@ -4,3 +4,4 @@ import Bank as b
 import Customer as c
 import Transactions as t
 
+import numpy
