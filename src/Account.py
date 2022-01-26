@@ -1,6 +1,7 @@
 
 import json
 
+
 class Account:
 
     def __init__(self, id, balance, type, customer):
@@ -11,7 +12,7 @@ class Account:
 
 
 def saldo(pers):
-
+    print("test")
     with open("bank.json") as jsonFile:
         jsonObject = json.load(jsonFile)
         jsonFile.close()

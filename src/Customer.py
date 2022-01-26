@@ -16,13 +16,13 @@ def check(pers):
         jsonFile.close()
 
     account = jsonObject["account"]
-    customer = jsonObject["customer"]
+    customers = jsonObject["customers"]
     transactions = jsonObject["transactions"]
 
-    keys = customer.keys()
+    keys = customers.keys()
     for key in keys:
 
-        for var in customer[key]:
+        for var in customers[key]:
 
             if var == pers:
                 print("yes")
@@ -30,20 +30,33 @@ def check(pers):
     return False
 
 
-def add_customer(name, pers):
+def add_customer(name, pers, account, trans):
 
     with open("bank.json") as jsonFile:
         jsonObject = json.load(jsonFile)
+        jsonFile.close()
 
-        customer = jsonObject["customer"]
-        idd = str(len(customer) + 1)
+        customers = jsonObject["customers"]
+        keys = customers.keys()
+        for key in keys:
 
-        jsonObject["customer"][idd]["name"] = name
-        jsonObject["customer"][idd]["pers"] = pers
-        jsonObject["customer"][idd]["accounts"] = 123
-        #json.dump(jsonObject, jsonFile)
+            for value in customers[key].values():
 
-        return True
+                if value == pers:
+                    print("Customer with that ss already exists")
+                    return False
+
+        print("Grats ", name, " account created", sep='')
+
+#        idd = str(len(customers) + 1)
+#
+        #jsonObject["customer"][idd] = {"name": "Pelle", "pers": 771016, "accounts": [], "trans": []}
+
+#    with open("bank.json", "w") as jsonFile:
+#        json.dump(jsonObject, jsonFile)
+#        jsonFile.close()
+
+    return True
 
 
 
