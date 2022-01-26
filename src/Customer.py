@@ -30,41 +30,20 @@ def check(pers):
     return False
 
 
-def saldo(pers):
+def add_customer(name, pers):
 
     with open("bank.json") as jsonFile:
         jsonObject = json.load(jsonFile)
-        jsonFile.close()
 
-    account = jsonObject["account"]
-    #customer = jsonObject["customer"]
-    transactions = jsonObject["transactions"]
+        customer = jsonObject["customer"]
+        idd = str(len(customer) + 1)
 
-    keys = account.keys()
+        jsonObject["customer"][idd]["name"] = name
+        jsonObject["customer"][idd]["pers"] = pers
+        jsonObject["customer"][idd]["accounts"] = 123
+        #json.dump(jsonObject, jsonFile)
 
-    for key in keys:
-        print(key)
-
-        for value in account[key].values():
-            print(value)
-            if value == pers:
-                print("Saldo: ", account[key]["saldo"], sep='')
-                return True
-
-    return False
+        return True
 
 
-def add_customer(name, pers):
-
-    with open("bank.json", "w") as jsonFile:
-        jsonObject = json.load(jsonFile)
-        jsonFile.close()
-
-    #idd = str(len(customer) + 1)
-
-    print(type(idd))
-    print(jsonObject)
-    jsonObject["customer"][idd]["name"] = name
-    jsonObject["customer"][idd]["pers"] = pers
-    jsonObject["customer"][idd]["accounts"] = 123
 

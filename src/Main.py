@@ -15,15 +15,15 @@ import numpy as np
 #else:
  #   print("not found")
 
-#if c.add_customer("Kalle", 771016):
- #   print("success")
+if c.add_customer("Kalle", 771016):
+    print("success")
 #exit()
 
 while True:
 
     try:
         pers = int(input("Enter number: "))
-        if c.saldo(pers):
+        if a.saldo(pers):
             print("found")
         else:
             print("not found")
