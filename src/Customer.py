@@ -9,16 +9,15 @@ class Customer:
         self.bank = bank
 
 
-with open("bank.json") as jsonFile:
-    jsonObject = json.load(jsonFile)
-    jsonFile.close()
-
-account = jsonObject["account"]
-customer = jsonObject["customer"]
-transactions = jsonObject["transactions"]
-
-
 def check(pers):
+
+    with open("bank.json") as jsonFile:
+        jsonObject = json.load(jsonFile)
+        jsonFile.close()
+
+    account = jsonObject["account"]
+    customer = jsonObject["customer"]
+    transactions = jsonObject["transactions"]
 
     keys = customer.keys()
     for key in keys:
@@ -33,9 +32,16 @@ def check(pers):
 
 def saldo(pers):
 
+    with open("bank.json") as jsonFile:
+        jsonObject = json.load(jsonFile)
+        jsonFile.close()
+
+    account = jsonObject["account"]
+    #customer = jsonObject["customer"]
+    transactions = jsonObject["transactions"]
+
     keys = account.keys()
-    size = len(account) + 1
-    print("len: ", size, sep='')
+
     for key in keys:
         print(key)
 
@@ -47,8 +53,18 @@ def saldo(pers):
 
     return False
 
+
 def add_customer(name, pers):
 
-    id = len(customer) + 1
+    with open("bank.json", "w") as jsonFile:
+        jsonObject = json.load(jsonFile)
+        jsonFile.close()
 
+    #idd = str(len(customer) + 1)
+
+    print(type(idd))
+    print(jsonObject)
+    jsonObject["customer"][idd]["name"] = name
+    jsonObject["customer"][idd]["pers"] = pers
+    jsonObject["customer"][idd]["accounts"] = 123
 

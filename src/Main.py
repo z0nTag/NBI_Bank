@@ -15,6 +15,9 @@ import numpy as np
 #else:
  #   print("not found")
 
+#if c.add_customer("Kalle", 771016):
+ #   print("success")
+#exit()
 
 while True:
 
@@ -24,14 +27,11 @@ while True:
             print("found")
         else:
             print("not found")
+
     except ValueError as e:
         print("Only numbers accepted. Please enter a number\n")
         continue
     break
-
-
-
-
 
 
 
