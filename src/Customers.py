@@ -49,7 +49,7 @@ def print_all_customers():
                 print(var, customers[key][var], sep=': ')
 
 
-def add_customer(name, pers, account, trans):
+def add_customer(name, pers, account):
 
     with open("bank.json") as jsonFile:
         jsonObject = json.load(jsonFile)
@@ -69,7 +69,7 @@ def add_customer(name, pers, account, trans):
 
 #        idd = str(len(customers) + 1)
 #
-        #jsonObject["customer"][idd] = {"name": "Pelle", "pers": 771016, "accounts": [], "trans": []}
+        #jsonObject["customer"][idd] = {"name": name, "pers": pers, "accounts": account, "trans": []}
 
 #    with open("bank.json", "w") as jsonFile:
 #        json.dump(jsonObject, jsonFile)

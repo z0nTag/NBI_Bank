@@ -7,6 +7,15 @@ import Transactions as t
 import numpy as np
 
 
+dt = datetime.datetime
+trans = {
+    1: (1, 200, dt.timestamp(dt.now())),
+    2: (1, 100, dt.timestamp(dt.now())),
+    3: (1, -50, dt.timestamp(dt.now()))
+}
+print(trans)
+
+
 def read_json():
     with open("bank.json") as jsonFile:
         jsonObject = json.load(jsonFile)
@@ -26,7 +35,8 @@ while True:
         continue
 
     if choice == 0:
-        break
+        input("Goodbye! Please come again!\n")
+        exit()
 
     elif choice == 1:
         jsonObject = read_json()
@@ -51,12 +61,13 @@ while True:
                 print("y worked")
                 new_account = [len(account) + 1]
                 #create an account
+                a.open_account(new_account, pers)
 
             else:
                 account = []
 
             trans = []
-            #c.add_customer(name, pers, account, trans)
+            #c.add_customer(name, pers, account)
 
     elif choice == 3:
 
@@ -81,7 +92,7 @@ while True:
         while True:
             try:
                 account = int(input("Enter account number: "))
-                withdraw = int(input("Enter amount to withdraw: "))
+                amount = int(input("Enter amount to withdraw: "))
             except ValueError as e:
                 print("Only numbers accepted", end='\n')
                 continue
@@ -90,9 +101,12 @@ while True:
 
                 if key == str(account):
                     balance = accounts[key]["balance"]
-                    if balance >= withdraw:
-                        balance -= withdraw
+                    if balance >= amount:
+                        balance -= amount
                         print("Withdraw made, now ", balance, " left", sep='')
+                        pers = accounts[key]["pers"]
+                        #add transaction
+                        #b.make_transaction(pers, amount)
                         break
                     else:
                         print("Account found but now enough funds")

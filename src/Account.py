@@ -1,4 +1,4 @@
-
+import datetime
 import json
 
 
@@ -46,8 +46,17 @@ def close_account(account_number):
         if key == str(account_number):
             account.pop(key)
             print(account)
+            #dump to bank.json
             return True
     return False
 
 
+def open_account(new_account, pers):
 
+    jsonObject = read_json()[0]
+    account = read_json()[1]
+    jsonObject["customer"][new_account] = {"balance": 0, "type": "deb", "customer": pers}
+
+#    with open("bank.json", "w") as jsonFile:
+#        json.dump(jsonObject, jsonFile)
+#        jsonFile.close()
