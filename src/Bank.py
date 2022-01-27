@@ -15,10 +15,11 @@ def make_transaction(pers, amount):
         jsonFile.close()
 
         transactions = jsonObject["transactions"]
-        keys = transactions.keys()
+        #keys = transactions.keys()
 
         idd = str(len(transactions) + 1)
         jsonObject["transactions"][idd] = (pers, amount, timestamp())
+        print(jsonObject["transactions"][idd])
 
 #    with open("bank.json", "w") as jsonFile:
 #        json.dump(jsonObject, jsonFile)

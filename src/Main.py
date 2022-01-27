@@ -7,15 +7,6 @@ import Transactions as t
 import numpy as np
 
 
-dt = datetime.datetime
-trans = {
-    1: (1, 200, dt.timestamp(dt.now())),
-    2: (1, 100, dt.timestamp(dt.now())),
-    3: (1, -50, dt.timestamp(dt.now()))
-}
-print(trans)
-
-
 def read_json():
     with open("bank.json") as jsonFile:
         jsonObject = json.load(jsonFile)
@@ -28,7 +19,7 @@ print("Welcome to The Best Bank. Please make a choice", end='\n')
 while True:
 
     try:
-        print("1. Create new customer  2. Open account for existing customer  3. Check balance 4. Make a transaction 5. View all transactions 6. Close account 7. Delete customer 0. Exit 999. View all customers")
+        print("\n1. Create new customer  2. Open account for existing customer  3. Check balance 4. Make a transaction 5. View all transactions 6. Close account 7. Delete customer 0. Exit 999. View all customers")
         choice = int(input("Enter choice: "))
     except ValueError as e:
         print("Only numbers accepted. Please enter a number\n")
@@ -58,7 +49,6 @@ while True:
 
             oc = input("Would you like to open a bank account? Press y for Yes ")
             if oc.lower() == "y":
-                print("y worked")
                 new_account = [len(account) + 1]
                 #create an account
                 a.open_account(new_account, pers)
@@ -68,6 +58,10 @@ while True:
 
             trans = []
             #c.add_customer(name, pers, account)
+
+    elif choice == 2:
+        #a.open_account
+        break
 
     elif choice == 3:
 
@@ -88,11 +82,16 @@ while True:
         jsonObject = read_json()
         accounts = jsonObject["account"]
         keys = accounts.keys()
-
+        action = 0
         while True:
             try:
                 account = int(input("Enter account number: "))
-                amount = int(input("Enter amount to withdraw: "))
+
+                while action != 1 or 2:
+
+                    action = int(input("Choose 1. Withdraw or 2. Deposit: "))
+                    break
+                amount = int(input("Enter amount: "))
             except ValueError as e:
                 print("Only numbers accepted", end='\n')
                 continue
@@ -101,16 +100,24 @@ while True:
 
                 if key == str(account):
                     balance = accounts[key]["balance"]
-                    if balance >= amount:
-                        balance -= amount
-                        print("Withdraw made, now ", balance, " left", sep='')
-                        pers = accounts[key]["pers"]
-                        #add transaction
-                        #b.make_transaction(pers, amount)
+
+                    if action == 1:
+                        if balance >= amount:
+                            balance -= amount
+                            print("Withdraw made, new balance ", balance, sep='')
+                            pers = accounts[key]["customer"]
+                            amount -= (amount * 2)
+                            b.make_transaction(pers, amount)
+                            break
+                        else:
+                            print("Account found but now enough funds")
                         break
-                    else:
-                        print("Account found but now enough funds")
-                    break
+                    elif action == 2:
+                        balance += amount
+                        print("Deposit made, new balance: ", balance, sep='')
+                        pers = accounts[key]["customer"]
+                        b.make_transaction(pers, amount)
+                        break
                 else:
                     print("Account not found")
                 break

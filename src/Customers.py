@@ -37,7 +37,6 @@ def check(pers):
 def print_all_customers():
 
     with open("bank.json") as jsonFile:
-
         jsonObject = json.load(jsonFile)
         jsonFile.close()
         customers = jsonObject["customers"]

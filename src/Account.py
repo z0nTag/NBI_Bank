@@ -44,8 +44,9 @@ def close_account(account_number):
 
     for key in keys:
         if key == str(account_number):
+            print("Balance: ", account[key]["balance"])
             account.pop(key)
-            print(account)
+            #remove the account in customer list
             #dump to bank.json
             return True
     return False
