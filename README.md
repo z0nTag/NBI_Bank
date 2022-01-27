@@ -1,2 +1,2 @@
 # NBI_Bank
-Python inlämningsuppgift
+Python inlämningsuppgift WiP Beta 1.0
