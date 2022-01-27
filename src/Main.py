@@ -1,6 +1,6 @@
 import datetime
 import json
-import Customer as c
+import Customers as c
 import Account as a
 import Bank as b
 import Transactions as t
@@ -19,7 +19,7 @@ print("Welcome to The Best Bank. Please make a choice", end='\n')
 while True:
 
     try:
-        print("1. Create new customer  2. Open account for existing customer  3. Check balance 4. Make a transaction 5. View all transactions 6. Close account 7. Delete customer 0. Exit")
+        print("1. Create new customer  2. Open account for existing customer  3. Check balance 4. Make a transaction 5. View all transactions 6. Close account 7. Delete customer 0. Exit 999. View all customers")
         choice = int(input("Enter choice: "))
     except ValueError as e:
         print("Only numbers accepted. Please enter a number\n")
@@ -63,7 +63,7 @@ while True:
         while True:
             try:
                 pers = int(input("Enter your ss-number: "))
-                if a.saldo(pers):
+                if a.balance(pers):
                     print("found")
                 else:
                     print("Customer not found")
@@ -89,7 +89,7 @@ while True:
             for key in keys:
 
                 if key == str(account):
-                    balance = accounts[key]["saldo"]
+                    balance = accounts[key]["balance"]
                     if balance >= withdraw:
                         balance -= withdraw
                         print("Withdraw made, now ", balance, " left", sep='')
@@ -101,6 +101,25 @@ while True:
                     print("Account not found")
                 break
             break
+
+    elif choice == 6:
+        while True:
+            try:
+                account_number = int(input("Number of account to close: "))
+            except ValueError as e:
+                print("Only numbers accepted. Please enter a number\n")
+                continue
+
+            if a.close_account(account_number):
+                print("Account closed")
+            else:
+                print("Something went wrong closing the account")
+            break
+
+    elif choice == 999:
+        c.print_all_customers()
+
+
 #if c.add_customer("Kalle", 801016):
  #   print("Customer created with success")
 #else:

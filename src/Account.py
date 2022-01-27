@@ -11,22 +11,43 @@ class Account:
         self.customer = customer
 
 
-def saldo(pers):
-    print("test")
+def read_json():
     with open("bank.json") as jsonFile:
         jsonObject = json.load(jsonFile)
         jsonFile.close()
 
         account = jsonObject["account"]
         keys = account.keys()
+    return jsonObject, account, keys
 
-        for key in keys:
 
-            for value in account[key].values():
+def balance(pers):
 
-                if value == pers:
-                    print("Saldo: ", account[key]["saldo"], sep='')
-                    return True
+    account = read_json()[1]
+    keys = read_json()[2]
+
+    for key in keys:
+
+        for value in account[key].values():
+
+            if value == pers:
+                print("Balance: ", account[key]["balance"], sep='')
+                return True
 
     return False
+
+
+def close_account(account_number):
+
+    account = read_json()[1]
+    keys = read_json()[2]
+
+    for key in keys:
+        if key == str(account_number):
+            account.pop(key)
+            print(account)
+            return True
+    return False
+
+
 

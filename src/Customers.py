@@ -3,10 +3,14 @@ import json
 import datetime
 
 
-class Customer:
+class Customers:
 
-    def __init__(self, bank):
-        self.bank = bank
+    def __init__(self, id, name, pers, accounts, trans):
+        self.id = id
+        self.name = name
+        self.pers = pers
+        self.accounts = accounts
+        self.trans = trans
 
 
 def check(pers):
@@ -28,6 +32,21 @@ def check(pers):
                 print("yes")
                 return True
     return False
+
+
+def print_all_customers():
+
+    with open("bank.json") as jsonFile:
+
+        jsonObject = json.load(jsonFile)
+        jsonFile.close()
+        customers = jsonObject["customers"]
+        keys = customers.keys()
+
+        for key in keys:
+            print("\nCustomer number: ", key, sep='')
+            for var in customers[key]:
+                print(var, customers[key][var], sep=': ')
 
 
 def add_customer(name, pers, account, trans):
