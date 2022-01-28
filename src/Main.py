@@ -86,11 +86,11 @@ while True:
         while True:
             try:
                 account = int(input("Enter account number: "))
-
-                while action != 1 or 2:
-
+                action = int(input("Choose 1. Withdraw or 2. Deposit: "))
+                while action != 1 and action != 2:
+                    print("Only the number 1 or 2 accepted")
                     action = int(input("Choose 1. Withdraw or 2. Deposit: "))
-                    break
+
                 amount = int(input("Enter amount: "))
             except ValueError as e:
                 print("Only numbers accepted", end='\n')
