@@ -1,4 +1,4 @@
-import datetime
+
 import json
 import Customers as c
 import Account as a
@@ -60,8 +60,11 @@ while True:
             #c.add_customer(name, pers, account)
 
     elif choice == 2:
-        #a.open_account
-        break
+        if a.open_account(123, 123):
+            print("Account created")
+        else:
+            print("Account could not be created")
+        continue
 
     elif choice == 3:
 
@@ -77,7 +80,7 @@ while True:
                 print("Only numbers accepted. Please enter a number\n")
                 continue
             break
-
+        continue
     elif choice == 4:
         jsonObject = read_json()
         accounts = jsonObject["account"]
@@ -122,7 +125,7 @@ while True:
                     print("Account not found")
                 break
             break
-
+        continue
     elif choice == 6:
         while True:
             try:
@@ -136,10 +139,10 @@ while True:
             else:
                 print("Something went wrong closing the account")
             break
-
+        continue
     elif choice == 999:
         c.print_all_customers()
-
+        continue
 
 #if c.add_customer("Kalle", 801016):
  #   print("Customer created with success")

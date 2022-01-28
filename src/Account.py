@@ -53,9 +53,15 @@ def close_account(account_number):
 
 def open_account(new_account, pers):
 
-    jsonObject = read_json()[0]
-    account = read_json()[1]
-    jsonObject["customer"][new_account] = {"balance": 0, "type": "deb", "customer": pers}
+    try:
+        bank = read_json()
+        account = bank["account"]
+        print(account)
+        account[new_account] = {"balance": 0, "type": "deb", "customer": pers}
+        return True
+    except Exception as e:
+        print("error: ", e)
+        return False
 
 #    with open("bank.json", "w") as jsonFile:
 #        json.dump(jsonObject, jsonFile)
