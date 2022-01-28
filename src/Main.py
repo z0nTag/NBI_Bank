@@ -4,7 +4,7 @@ import Customers as c
 import Account as a
 import Bank as b
 import Transactions as t
-import numpy as np
+
 
 
 def read_json(): #läser in jsonfil, laddar det till jsonObject/banken, retunerar jsonObject. Kommer läggas i egen klass
