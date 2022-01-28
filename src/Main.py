@@ -1,17 +1,11 @@
 
 import json
-import Customers as c
 import Account as a
 import Bank as b
+import Customers as c
+import Datasource as d
+
 import Transactions as t
-
-
-
-def read_json(): #läser in jsonfil, laddar det till jsonObject/banken, retunerar jsonObject. Kommer läggas i egen klass
-    with open("bank.json") as jsonFile:
-        jsonObject = json.load(jsonFile)
-        jsonFile.close()
-    return jsonObject
 
 
 print("Welcome to The Best Bank. Please make a choice", end='\n')
@@ -30,9 +24,9 @@ while True:
         exit()
 
     elif choice == 1:
-        jsonObject = read_json()
-        customers = jsonObject["customers"]
-        account = jsonObject["account"]
+        bank = d.read_json()
+        customers = bank["customers"]
+        account = bank["account"]
 
         name = input("Please enter name: ")
         try:
@@ -82,8 +76,8 @@ while True:
             break
         continue
     elif choice == 4:
-        jsonObject = read_json()
-        accounts = jsonObject["account"]
+        bank = d.read_json()
+        accounts = bank["account"]
         keys = accounts.keys()
         action = 0
         while True:

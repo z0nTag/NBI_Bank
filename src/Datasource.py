@@ -15,3 +15,10 @@ def read_json():
         jsonFile.close()
     return jsonObject
 
+
+def write_json(bank):
+
+    with open("bank.json", "w") as jsonFile:
+        json.dump(bank, jsonFile)
+        jsonFile.close()
+

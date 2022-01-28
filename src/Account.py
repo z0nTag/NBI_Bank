@@ -1,5 +1,6 @@
 
 import json
+import Datasource as d
 
 
 class Account:
@@ -11,17 +12,9 @@ class Account:
         self.customer = customer
 
 
-def read_json():
-    with open("bank.json") as jsonFile:
-        jsonObject = json.load(jsonFile)
-        jsonFile.close()
-
-    return jsonObject
-
-
 def balance(pers):
 
-    bank = read_json()
+    bank = d.read_json()
     account = bank["account"]
     keys = account.keys()
 
@@ -37,7 +30,7 @@ def balance(pers):
 
 def close_account(account_number):
 
-    bank = read_json()
+    bank = d.read_json()
     account = bank["account"]
     keys = account.keys()
 
@@ -54,7 +47,7 @@ def close_account(account_number):
 def open_account(new_account, pers):
 
     try:
-        bank = read_json()
+        bank = d.read_json()
         account = bank["account"]
         print(account)
         account[new_account] = {"balance": 0, "type": "deb", "customer": pers}
