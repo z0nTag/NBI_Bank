@@ -7,7 +7,7 @@ import Transactions as t
 import numpy as np
 
 
-def read_json():
+def read_json(): #läser in jsonfil, laddar det till jsonObject/banken, retunerar jsonObject. Kommer läggas i egen klass
     with open("bank.json") as jsonFile:
         jsonObject = json.load(jsonFile)
         jsonFile.close()
@@ -71,7 +71,7 @@ while True:
                 if a.balance(pers):
                     print("found")
                 else:
-                    print("Customer not found")
+                    print("No accounts found")
                     break
             except ValueError as e:
                 print("Only numbers accepted. Please enter a number\n")

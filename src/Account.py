@@ -16,31 +16,30 @@ def read_json():
         jsonObject = json.load(jsonFile)
         jsonFile.close()
 
-        account = jsonObject["account"]
-        keys = account.keys()
-    return jsonObject, account, keys
+    return jsonObject
 
 
 def balance(pers):
 
-    account = read_json()[1]
-    keys = read_json()[2]
+    bank = read_json()
+    account = bank["account"]
+    keys = account.keys()
 
     for key in keys:
 
         for value in account[key].values():
 
             if value == pers:
-                print("Balance: ", account[key]["balance"], sep='')
-                return True
+                print("Account: ", key, " Balance: ", account[key]["balance"], sep='')
 
     return False
 
 
 def close_account(account_number):
 
-    account = read_json()[1]
-    keys = read_json()[2]
+    bank = read_json()
+    account = bank["account"]
+    keys = account.keys()
 
     for key in keys:
         if key == str(account_number):
