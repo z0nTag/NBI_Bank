@@ -19,7 +19,18 @@ while True:
         print("Only numbers accepted. Please enter a number\n")
         continue
 
-    if choice == 0:
+    if choice == 11:
+
+        test = "json write test"
+
+        if d.write_json(test):
+            print("Hurra!")
+        else:
+            print("Nooooo...:(")
+
+        continue
+
+    elif choice == 0:
         input("Goodbye! Please come again!\n")
         exit()
 
@@ -75,6 +86,7 @@ while True:
                 continue
             break
         continue
+
     elif choice == 4:
         bank = d.read_json()
         accounts = bank["account"]
@@ -104,7 +116,7 @@ while True:
                             print("Withdraw made, new balance ", balance, sep='')
                             pers = accounts[key]["customer"]
                             amount -= (amount * 2)
-                            b.make_transaction(pers, amount)
+                            b.make_transaction(pers, amount, str(account))
                             break
                         else:
                             print("Account found but now enough funds")
@@ -113,7 +125,7 @@ while True:
                         balance += amount
                         print("Deposit made, new balance: ", balance, sep='')
                         pers = accounts[key]["customer"]
-                        b.make_transaction(pers, amount)
+                        b.make_transaction(pers, amount, str(account))
                         break
                 else:
                     print("Account not found")

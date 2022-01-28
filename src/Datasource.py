@@ -21,4 +21,4 @@ def write_json(bank):
     with open("bank.json", "w") as jsonFile:
         json.dump(bank, jsonFile)
         jsonFile.close()
-
+        return True
