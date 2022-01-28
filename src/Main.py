@@ -113,19 +113,25 @@ while True:
                     if action == 1:
                         if balance >= amount:
                             balance -= amount
-                            print("Withdraw made, new balance ", balance, sep='')
+
                             pers = accounts[key]["customer"]
                             amount -= (amount * 2)
-                            b.make_transaction(pers, amount, str(account))
+                            if b.make_transaction(pers, amount, str(account)):
+                                print("Withdraw made, new balance ", balance, sep='')
+                            else:
+                                print("Unknown error making transaction")
                             break
                         else:
                             print("Account found but now enough funds")
                         break
                     elif action == 2:
                         balance += amount
-                        print("Deposit made, new balance: ", balance, sep='')
                         pers = accounts[key]["customer"]
-                        b.make_transaction(pers, amount, str(account))
+
+                        if b.make_transaction(pers, amount, str(account)):
+                            print("Deposit made, new balance: ", balance, sep='')
+                        else:
+                            print("Unknown error making transaction")
                         break
                 else:
                     print("Account not found")
