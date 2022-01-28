@@ -1,0 +1,5 @@
+{"account": {"1001": {"balance": 1337, "type": "deb", "customer": 801016}, "1002": {"balance": 222, "type": "deb", "customer": 801016}}, 
+
+"transactions": {"1": [801016, 200, 1643190163.647603], "2": [801016, 100, 1643190163.647603], "3": [801016, 50, 1643190163.647603]}, 
+
+"customers": {"1": {"name": "Jonas", "pers": 801016, "accounts": [1001, 1002], "trans": []}, "2": {"name": "Pelle", "pers": 771016, "accounts": [], "trans": []}}}
