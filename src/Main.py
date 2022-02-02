@@ -5,7 +5,6 @@ import Bank as b
 import Customers as c
 import Datasource as d
 
-import Transactions as t
 
 bank = d.read_json()
 customers = bank["customers"]
