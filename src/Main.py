@@ -7,13 +7,27 @@ import Datasource as d
 
 import Transactions as t
 
+bank = d.read_json()
+customers = bank["customers"]
+keys = customers.keys()
+users = []
+print("***Creating instances of Customer via function i Bank class and adding to the list users***", end='\n\n')
+for key in keys:
+    value = customers[key]
+    users.append(b.new_customer(key, value["name"], value["pers"], value["accounts"], value["trans"]))
+
+for ob in users:
+    print(ob.id, ob.name, ob.pers, ob.accounts, ob.trans)
+
+print("***Creating instances of Customer via function i Bank class and adding to the list users***\n")
 
 print("Welcome to The Best Bank. Please make a choice", end='\n')
 
 while True:
 
     try:
-        print("\n1. Create new customer  2. Open account for existing customer  3. Check balance 4. Make a transaction 5. View all transactions 6. Close account 7. Delete customer 0. Exit 999. View all customers")
+        print("\n1. Create new customer  2. Open account for existing customer  3. Check balance 4. Make a transaction "
+              "5. View all transactions 6. Close account 7. Delete customer 0. Exit 999. View all customers")
         choice = int(input("Enter choice: "))
     except ValueError as e:
         print("Only numbers accepted. Please enter a number\n")
@@ -31,7 +45,7 @@ while True:
         continue
 
     elif choice == 0:
-        input("Goodbye! Please come again!\n")
+        print("Goodbye! Please come again!\n")
         exit()
 
     elif choice == 1:
@@ -54,15 +68,17 @@ while True:
 
             oc = input("Would you like to open a bank account? Press y for Yes ")
             if oc.lower() == "y":
-                new_account = [len(account) + 1]
+
+                new_account = int(list(account)[-1]) + 1
+                print(new_account)
                 #create an account
-                a.open_account(new_account, pers)
+                a.open_account(str(new_account), pers)
+                c.add_customer(name, pers, [new_account])
+                break
 
-            else:
-                account = []
-
-            trans = []
-            #c.add_customer(name, pers, account)
+            account = []
+            c.add_customer(name, pers, [])
+            continue
 
     elif choice == 2:
         if a.open_account(123, 123):
@@ -77,7 +93,7 @@ while True:
             try:
                 pers = int(input("Enter your ss-number: "))
                 if a.balance(pers):
-                    print("found")
+                    print()
                 else:
                     print("No accounts found")
                     break
@@ -92,6 +108,7 @@ while True:
         accounts = bank["account"]
         keys = accounts.keys()
         action = 0
+        found = 0
         while True:
             try:
                 account = int(input("Enter account number: "))
@@ -109,7 +126,7 @@ while True:
 
                 if key == str(account):
                     balance = accounts[key]["balance"]
-
+                    found = 1
                     if action == 1:
                         if balance >= amount:
                             balance -= amount
@@ -118,6 +135,7 @@ while True:
                             amount -= (amount * 2)
                             if b.make_transaction(pers, amount, str(account)):
                                 print("Withdraw made, new balance ", balance, sep='')
+                                break
                             else:
                                 print("Unknown error making transaction")
                             break
@@ -130,14 +148,21 @@ while True:
 
                         if b.make_transaction(pers, amount, str(account)):
                             print("Deposit made, new balance: ", balance, sep='')
+                            break
                         else:
                             print("Unknown error making transaction")
                         break
-                else:
-                    print("Account not found")
-                break
+
+            if found == 0:
+                print("Account not found")
+
             break
         continue
+
+    elif choice == 5:
+        print("Work in progress")
+        continue
+
     elif choice == 6:
         while True:
             try:
@@ -156,11 +181,6 @@ while True:
         c.print_all_customers()
         continue
 
-#if c.add_customer("Kalle", 801016):
- #   print("Customer created with success")
-#else:
- #   print("Error creating customer")
-#exit()
 
 
 

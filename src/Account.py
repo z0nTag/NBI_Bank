@@ -17,15 +17,17 @@ def balance(pers):
     bank = d.read_json()
     account = bank["account"]
     keys = account.keys()
-
+    found = 0
     for key in keys:
+        value = account[key]["customer"]
+        if value == pers:
+            print("Account: ", key, " Balance: ", account[key]["balance"], sep='')
+            found = 1
 
-        for value in account[key].values():
-
-            if value == pers:
-                print("Account: ", key, " Balance: ", account[key]["balance"], sep='')
-
-    return False
+    if found == 1:
+        return True
+    else:
+        return False
 
 
 def close_account(account_number):
@@ -49,13 +51,11 @@ def open_account(new_account, pers):
     try:
         bank = d.read_json()
         account = bank["account"]
-        print(account)
+
         account[new_account] = {"balance": 0, "type": "deb", "customer": pers}
+
+        d.write_json(bank)
         return True
     except Exception as e:
         print("error: ", e)
         return False
-
-#    with open("bank.json", "w") as jsonFile:
-#        json.dump(jsonObject, jsonFile)
-#        jsonFile.close()

@@ -57,15 +57,13 @@ def add_customer(name, pers, account):
                 print("Customer with that ss already exists")
                 return False
 
-    print("Grats ", name, " account created", sep='')
+    print("Account ", name, " successfully created", sep='')
 
-#        idd = str(len(customers) + 1)
-#
-        #jsonObject["customer"][idd] = {"name": name, "pers": pers, "accounts": account, "trans": []}
+    idd = str(len(customers) + 1)
 
-#    with open("bank.json", "w") as jsonFile:
-#        json.dump(jsonObject, jsonFile)
-#        jsonFile.close()
+    customers[idd] = {"name": name, "pers": pers, "accounts": account, "trans": []}
+
+    d.write_json(bank)
 
     return True
 
