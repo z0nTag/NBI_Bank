@@ -6,11 +6,13 @@ import Customers as c
 import Datasource as d
 
 
+print("***Creating instances of Customer via function i Bank class and adding to the list users***", end='\n\n')
+
 bank = d.read_json()
 customers = bank["customers"]
 keys = customers.keys()
 users = []
-print("***Creating instances of Customer via function i Bank class and adding to the list users***", end='\n\n')
+
 for key in keys:
     value = customers[key]
     users.append(b.new_customer(key, value["name"], value["pers"], value["accounts"], value["trans"]))
